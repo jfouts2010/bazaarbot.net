@@ -271,7 +271,8 @@ namespace WindowsFormsApplication2
                         ask.TicketsAgent.Commodities.First(p => p.Type == c).Stock -= amountTraded;
                         bid.TicketsAgent.Money += clearingPrice * amountTraded;
                         ask.TicketsAgent.Money -= clearingPrice * amountTraded;
-                        //do something for buyer and seller confirming price is good
+                        ask.TicketsAgent.AcceptedDeal(clearingPrice, amountTraded, c);
+                        bid.TicketsAgent.AcceptedDeal(clearingPrice, amountTraded, c);
                     }
                     if (ask.Ideal == 0)
                         Asks.RemoveAt(0);
@@ -282,14 +283,14 @@ namespace WindowsFormsApplication2
                 {
                     foreach (Ticket t in Bids)
                     {
-                        //do something for each bid that is left over
+                        t.TicketsAgent.RejectedDeal(c);
                     }
                 }
                 if (Asks.Count > 0)
                 {
                     foreach (Ticket t in Asks)
                     {
-                        //do something for each ask that is left over
+                        t.TicketsAgent.RejectedDeal(c);
                     }
                 }
             }
@@ -317,6 +318,15 @@ namespace WindowsFormsApplication2
         public Agent()
         {
 
+        }
+        public void AcceptedDeal(decimal clearingPrice, decimal quantTraded, CommodityType c)
+        {
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice * .9M) / 2;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice * 1.1M) / 2;
+        }
+        public void RejectedDeal(CommodityType c)
+        {
+            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * 1.1M;
         }
     }
     public class Commodity
