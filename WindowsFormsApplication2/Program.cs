@@ -14,10 +14,11 @@ namespace WindowsFormsApplication2
         [STAThread]
         static void Main()
         {
+            RunExample();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            RunExample();
+           
         }
         static void RunExample()
         {
@@ -25,28 +26,33 @@ namespace WindowsFormsApplication2
             List<Commodity> startingResources = new List<Commodity>();
             Commodity com1 = new Commodity();
             com1.Stock = 10;
+            com1.DesiredStock = 10;
             com1.Type = CommodityType.food;
-            com1.min = 0.8M;
+            com1.min = 0.8;
             com1.max = 1;
             Commodity com2 = new Commodity();
+            com2.DesiredStock = 10;
             com2.Stock = 10;
             com2.Type = CommodityType.metal;
-            com2.min = 0.8M;
+            com2.min = 0.8;
             com2.max = 1;
             Commodity com3 = new Commodity();
+            com3.DesiredStock = 10;
             com3.Stock = 10;
             com3.Type = CommodityType.ore;
-            com3.min = 0.8M;
+            com3.min = 0.8;
             com3.max = 1;
             Commodity com4 = new Commodity();
+            com4.DesiredStock = 10;
             com4.Stock = 10;
             com4.Type = CommodityType.tools;
-            com4.min = 0.8M;
+            com4.min = 0.8;
             com4.max = 1;
             Commodity com5 = new Commodity();
+            com5.DesiredStock = 10;
             com5.Stock = 10;
             com5.Type = CommodityType.wood;
-            com5.min = 0.8M;
+            com5.min = 0.8;
             com5.max = 1;
             startingResources.Add(com1); startingResources.Add(com2); startingResources.Add(com3); startingResources.Add(com4); startingResources.Add(com5);
             foreach (Occupation x in Enum.GetValues(typeof(Occupation)))
@@ -83,7 +89,7 @@ namespace WindowsFormsApplication2
                     Ticket t = new Ticket();
                     t.commodity = c.Type;
                     t.Ideal = c.Stock - c.DesiredStock;
-                    t.Price = c.min + ((decimal)rand.NextDouble() * (c.max - c.min));
+                    t.Price = c.min + ((double)rand.NextDouble() * (c.max - c.min));
                     t.limit = 0;
                     t.TicketsAgent = agent;
                     market.Bids.Add(t);
@@ -91,13 +97,18 @@ namespace WindowsFormsApplication2
                 if (c.Stock < c.DesiredStock)
                 {
                     //lets buy
-                    Ticket t = new Ticket();
-                    t.commodity = c.Type;
-                    t.Ideal = c.Stock - c.DesiredStock;
-                    t.Price = c.min + ((decimal)rand.NextDouble() * (c.max - c.min));
-                    t.limit = 0;
-                    t.TicketsAgent = agent;
-                    market.Asks.Add(t);
+                    if (agent.Money > 0)
+                    {
+                        Ticket t = new Ticket();
+                        t.commodity = c.Type;
+                        t.Ideal = c.DesiredStock - c.Stock;
+                        t.Price = c.min + ((double)rand.NextDouble() * (c.max - c.min));
+                        if (t.Ideal * t.Price > agent.Money)
+                            t.Ideal = agent.Money / t.Price;
+                        t.limit = 0;
+                        t.TicketsAgent = agent;
+                        market.Asks.Add(t);
+                    }
                 }
             }
         }
@@ -261,8 +272,8 @@ namespace WindowsFormsApplication2
                 {
                     Ticket bid = Bids.First();
                     Ticket ask = Asks.First();
-                    decimal amountTraded = Math.Min(bid.Ideal, ask.Ideal);
-                    decimal clearingPrice = (ask.Price + bid.Price) / 2;
+                    double amountTraded = Math.Min(bid.Ideal, ask.Ideal);
+                    double clearingPrice = (ask.Price + bid.Price) / 2;
                     if (amountTraded > 0)
                     {
                         bid.Ideal -= amountTraded;
@@ -300,9 +311,9 @@ namespace WindowsFormsApplication2
     }
     public class Ticket
     {
-        public decimal Price;
-        public decimal Ideal;
-        public decimal limit;
+        public double Price;
+        public double Ideal;
+        public double limit;
         public CommodityType commodity;
         public Agent TicketsAgent;
         public Ticket()
@@ -313,29 +324,29 @@ namespace WindowsFormsApplication2
     public class Agent
     {
         public List<Commodity> Commodities = new List<Commodity>();
-        public decimal Money;
+        public double Money;
         public Occupation Job;
         public Agent()
         {
 
         }
-        public void AcceptedDeal(decimal clearingPrice, decimal quantTraded, CommodityType c)
+        public void AcceptedDeal(double clearingPrice, double quantTraded, CommodityType c)
         {
-            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice * .9M) / 2;
-            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice * 1.1M) / 2;
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice * .9) / 2;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice * 1.1) / 2;
         }
         public void RejectedDeal(CommodityType c)
         {
-            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * 1.1M;
+            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * 1.1;
         }
     }
     public class Commodity
     {
         public CommodityType Type;
-        public decimal Stock;
-        public decimal DesiredStock;
-        public decimal min;
-        public decimal max;
+        public double Stock;
+        public double DesiredStock;
+        public double min;
+        public double max;
     }
     public enum CommodityType
     {
