@@ -2,8 +2,9 @@ c:\users\john\documents\visual studio 2015\Projects\WindowsFormsApplication2\Win
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.pdb
-C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form1.resources
+C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache

@@ -14,14 +14,15 @@ namespace WindowsFormsApplication2
         [STAThread]
         static void Main()
         {
-            RunExample();
+            Market data = RunExample();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form1(data));
            
         }
-        static void RunExample()
+        static Market RunExample()
         {
+            int day = 1;
             Market market = new Market();
             List<Commodity> startingResources = new List<Commodity>();
             Commodity com1 = new Commodity();
@@ -67,7 +68,7 @@ namespace WindowsFormsApplication2
                     market.Agents.Add(agent);
                 }
             }
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 //one day
                 foreach (Agent a in market.Agents)
@@ -75,8 +76,12 @@ namespace WindowsFormsApplication2
                     DoJob(a);
                     CreateTickets(a, market);
                 }
-                market.ResolveTickets();
+                market.ResolveTickets(day);
+                market.MoveAgents();
+                market.GetOccupationNumbers(day);
+                day++;
             }
+            return market;
         }
         static void CreateTickets(Agent agent, Market market)
         {
@@ -92,7 +97,7 @@ namespace WindowsFormsApplication2
                     t.Price = c.min + ((double)rand.NextDouble() * (c.max - c.min));
                     t.limit = 0;
                     t.TicketsAgent = agent;
-                    market.Bids.Add(t);
+                    market.Asks.Add(t);
                 }
                 if (c.Stock < c.DesiredStock)
                 {
@@ -107,7 +112,7 @@ namespace WindowsFormsApplication2
                             t.Ideal = agent.Money / t.Price;
                         t.limit = 0;
                         t.TicketsAgent = agent;
-                        market.Asks.Add(t);
+                        market.Bids.Add(t);
                     }
                 }
             }
@@ -118,6 +123,10 @@ namespace WindowsFormsApplication2
             if (agent.Job == Occupation.farmer)
             {
                 agent.Commodities.First(p => p.Type == CommodityType.food).DesiredStock = 0;
+                agent.Commodities.First(p => p.Type == CommodityType.tools).DesiredStock = 10;
+                agent.Commodities.First(p => p.Type == CommodityType.wood).DesiredStock = 10;
+                agent.Commodities.First(p => p.Type == CommodityType.ore).DesiredStock = 0;
+                agent.Commodities.First(p => p.Type == CommodityType.metal).DesiredStock = 0;
                 if (agent.Commodities.First(p => p.Type == CommodityType.wood).Stock >= 1)
                 {
                     if (agent.Commodities.First(p => p.Type == CommodityType.tools).Stock > 0)
@@ -143,7 +152,11 @@ namespace WindowsFormsApplication2
 
             if (agent.Job == Occupation.miner)
             {
+                agent.Commodities.First(p => p.Type == CommodityType.food).DesiredStock = 10;
                 agent.Commodities.First(p => p.Type == CommodityType.ore).DesiredStock = 0;
+                agent.Commodities.First(p => p.Type == CommodityType.metal).DesiredStock = 0;
+                agent.Commodities.First(p => p.Type == CommodityType.tools).DesiredStock = 10;
+                agent.Commodities.First(p => p.Type == CommodityType.wood).DesiredStock = 0;
                 if (agent.Commodities.First(p => p.Type == CommodityType.food).Stock >= 1)
                 {
                     if (agent.Commodities.First(p => p.Type == CommodityType.tools).Stock > 0)
@@ -171,6 +184,9 @@ namespace WindowsFormsApplication2
             {
                 agent.Commodities.First(p => p.Type == CommodityType.metal).DesiredStock = 0;
                 agent.Commodities.First(p => p.Type == CommodityType.ore).DesiredStock = 10;
+                agent.Commodities.First(p => p.Type == CommodityType.food).DesiredStock = 10;
+                agent.Commodities.First(p => p.Type == CommodityType.tools).DesiredStock = 10;
+                agent.Commodities.First(p => p.Type == CommodityType.wood).DesiredStock = 0;
                 if (agent.Commodities.First(p => p.Type == CommodityType.food).Stock >= 1)
                 {
                     if (agent.Commodities.First(p => p.Type == CommodityType.tools).Stock > 0)
@@ -199,6 +215,10 @@ namespace WindowsFormsApplication2
             if (agent.Job == Occupation.woodcutter)
             {
                 agent.Commodities.First(p => p.Type == CommodityType.wood).DesiredStock = 0;
+                agent.Commodities.First(p => p.Type == CommodityType.food).DesiredStock = 10;
+                agent.Commodities.First(p => p.Type == CommodityType.ore).DesiredStock = 0;
+                agent.Commodities.First(p => p.Type == CommodityType.metal).DesiredStock = 0;
+                agent.Commodities.First(p => p.Type == CommodityType.tools).DesiredStock = 10;
                 if (agent.Commodities.First(p => p.Type == CommodityType.food).Stock >= 1)
                 {
                     if (agent.Commodities.First(p => p.Type == CommodityType.tools).Stock > 0)
@@ -252,26 +272,82 @@ namespace WindowsFormsApplication2
             }
         }
     }
+    public class OccupationData
+    {
+        public int day;
+        public Occupation job;
+        public int workers;
+    }
     public class Market
     {
         public List<Ticket> Bids = new List<Ticket>();
         public List<Ticket> Asks = new List<Ticket>();
+        public Dictionary<CommodityType, double> SupplybyDemand = new Dictionary<CommodityType, double>();
         public List<Agent> Agents = new List<Agent>();
+        public List<Commodity> GraphData = new List<Commodity>();
+        public List<OccupationData> OccupationD = new List<OccupationData>();
         public Market()
         {
 
         }
-        public void ResolveTickets()
+        public void GetOccupationNumbers(int day)
+        {
+            foreach(Occupation o in Enum.GetValues(typeof(Occupation)))
+            {
+                OccupationData od = new OccupationData();
+                od.day = day;
+                od.job = o;
+                od.workers = Agents.Where(p => p.Job == o).Count();
+                OccupationD.Add(od);
+            }
+        }
+        public Occupation CommodityTypeToOccupation(CommodityType type)
+        {
+            if (type == CommodityType.food)
+                return Occupation.farmer;
+            else if (type == CommodityType.metal)
+                return Occupation.refiner;
+            else if (type == CommodityType.ore)
+                return Occupation.miner;
+            else if (type == CommodityType.tools)
+                return Occupation.blacksmith;
+            else 
+                return Occupation.woodcutter;
+        }
+        public void MoveAgents()
+        {
+            foreach(Agent a in Agents)
+            {
+                if(a.Money < 0)
+                {
+                    CommodityType highestType = SupplybyDemand.OrderBy(p => p.Value).First().Key;
+                    a.Job = CommodityTypeToOccupation(highestType);
+                    a.Money = 10;
+                }
+            }
+        }
+        public void ResolveTickets(int now)
         {
             foreach (CommodityType c in Enum.GetValues(typeof(CommodityType)))
             {
-                Bids = Bids.Where(p => p.commodity == c).OrderByDescending(p => p.Price).ToList();
-                Asks = Asks.Where(p => p.commodity == c).OrderBy(p => p.Price).ToList();
-                int trades = Math.Min(Asks.Count, Bids.Count);
-                while (Bids.Count > 0 && Asks.Count > 0)
+                List<Ticket> tempBids = Bids.Where(p => p.commodity == c).OrderByDescending(p => p.Price).ToList();
+                List<Ticket> tempAsks = Asks.Where(p => p.commodity == c).OrderBy(p => p.Price).ToList();
+                double TodaySupply = 0;
+                double TodayDemand = 0;
+                foreach(Ticket bid in tempBids)
                 {
-                    Ticket bid = Bids.First();
-                    Ticket ask = Asks.First();
+                    TodayDemand += bid.Ideal;
+                }
+                foreach(Ticket ask in tempAsks)
+                {
+                    TodaySupply += ask.Ideal;
+                }
+                SupplybyDemand[c] = TodayDemand > 0? TodaySupply / TodayDemand : 1000000000;
+                int trades = Math.Min(tempAsks.Count, Bids.Count);
+                while (tempBids.Count > 0 && tempAsks.Count > 0)
+                {
+                    Ticket bid = tempBids.First();
+                    Ticket ask = tempAsks.First();
                     double amountTraded = Math.Min(bid.Ideal, ask.Ideal);
                     double clearingPrice = (ask.Price + bid.Price) / 2;
                     if (amountTraded > 0)
@@ -286,24 +362,35 @@ namespace WindowsFormsApplication2
                         bid.TicketsAgent.AcceptedDeal(clearingPrice, amountTraded, c);
                     }
                     if (ask.Ideal == 0)
-                        Asks.RemoveAt(0);
+                        tempAsks.RemoveAt(0);
                     if (bid.Ideal == 0)
-                        Bids.RemoveAt(0);
+                        tempBids.RemoveAt(0);
                 }
-                if (Bids.Count > 0)
+                if (tempBids.Count > 0)
                 {
-                    foreach (Ticket t in Bids)
+                    foreach (Ticket t in tempBids)
                     {
-                        t.TicketsAgent.RejectedDeal(c);
+                       // t.TicketsAgent.RejectedBid(c);
                     }
                 }
-                if (Asks.Count > 0)
+                if (tempAsks.Count > 0)
                 {
-                    foreach (Ticket t in Asks)
+                    foreach (Ticket t in tempAsks)
                     {
-                        t.TicketsAgent.RejectedDeal(c);
+                       // if(TodaySupply < TodayDemand)
+                          //  t.TicketsAgent.RejectedAsk(c);
                     }
                 }
+                double GuesstimatePrice = 0;
+                foreach(Agent a in Agents)
+                {
+                    GuesstimatePrice += (a.Commodities.First(p => p.Type == c).min + a.Commodities.First(p => p.Type == c).max) / 2;
+                }
+                GuesstimatePrice = GuesstimatePrice / Agents.Count;
+                Commodity tempCom = new Commodity();
+                tempCom.Type = c;
+                tempCom.max = GuesstimatePrice;
+                this.GraphData.Add(tempCom);
             }
             Bids.Clear();
             Asks.Clear();
@@ -335,9 +422,23 @@ namespace WindowsFormsApplication2
             Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice * .9) / 2;
             Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice * 1.1) / 2;
         }
-        public void RejectedDeal(CommodityType c)
+        public void RejectedBid(CommodityType c)
         {
-            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * 1.1;
+            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * 1.01;
+            Commodities.First(p => p.Type == c).min = Commodities.First(p => p.Type == c).min * 1.01;
+            if (Commodities.First(p => p.Type == c).min > 9000)
+                Commodities.First(p => p.Type == c).min = 9000;
+            if (Commodities.First(p => p.Type == c).max > 10000)
+                Commodities.First(p => p.Type == c).max = 10000;
+        }
+        public void RejectedAsk(CommodityType c)
+        {
+            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * .99;
+            Commodities.First(p => p.Type == c).min = Commodities.First(p => p.Type == c).min * .99;
+            if (Commodities.First(p => p.Type == c).min < 0.1)
+                Commodities.First(p => p.Type == c).min = 0.1;
+            if (Commodities.First(p => p.Type == c).max < 0.15)
+                Commodities.First(p => p.Type == c).max = 0.15;
         }
     }
     public class Commodity
