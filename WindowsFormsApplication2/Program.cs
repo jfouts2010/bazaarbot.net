@@ -73,7 +73,7 @@ namespace WindowsFormsApplication2
                     market.Agents.Add(agent);
                 }
             }
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 15000; i++)
             {
                 if (day == 900)
                 {
@@ -393,10 +393,7 @@ namespace WindowsFormsApplication2
                                 MarketMoney -= 15;
                                 a.Commodities.First(p => p.Type == CommodityType.food).Stock += 3;
                             }
-                            /* a.Commodities.First(p => p.Type == CommodityType.tools).Stock = 0;
-                             a.Commodities.First(p => p.Type == CommodityType.ore).Stock = 0;
-                             a.Commodities.First(p => p.Type == CommodityType.metal).Stock = 0;
-                             a.Commodities.First(p => p.Type == CommodityType.wood).Stock = 0;*/
+                          
                             a.daysSinceMove = 0;
                             break;
                         }
@@ -487,8 +484,8 @@ namespace WindowsFormsApplication2
                 {
                     foreach (Ticket t in tempAsks)
                     {
-                        if (TodaySupply < TodayDemand)
-                            t.TicketsAgent.RejectedAsk(c);
+                       /* if (TodaySupply < TodayDemand)
+                            t.TicketsAgent.RejectedAsk(c);*/
                     }
                 }
                 double GuesstimatePrice = 0;
