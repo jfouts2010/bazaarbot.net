@@ -29,7 +29,7 @@ namespace WindowsFormsApplication2
                 {
                     supply.Series[type].Points.AddXY(data.day, data.Supply);
                     demand.Series[type].Points.AddXY(data.day, data.Demand);
-                    amountsold.Series[type].Points.AddXY(data.day, data.AmountSold);
+                    chart3.Series[type].Points.AddXY(data.day, data.AmountSold);
                     chart1.Series[type].Points.AddXY(data.day, data.Price);
                     priceDemand.Series[type].Points.AddXY(data.day, data.workers == 0? data.Price * data.Demand : data.Price*data.Demand / data.workers);
                 }
@@ -47,7 +47,7 @@ namespace WindowsFormsApplication2
                 foreach (OccupationData com in CommodityData)
                 {
                     chart2.Series[type].Points.AddXY(com.day, com.workers);
-                    money.Series[type].Points.AddXY(com.day, com.money/com.workers);
+                    agentmoney.Series[type].Points.AddXY(com.day, com.money/com.workers);
                     agentincome.Series[type].Points.AddXY(com.day, com.income/com.workers);
                     
                 }

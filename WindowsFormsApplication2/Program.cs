@@ -44,7 +44,7 @@ namespace WindowsFormsApplication2
                     market.Agents.Add(agent);
                 }
             }
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 600; i++)
             {
                 if (day == 900)
                 {
@@ -222,9 +222,9 @@ namespace WindowsFormsApplication2
                             a.Job = CommodityTypeToOccupation(x2.Type);
                             if (a.Money < 0)
                             {
-                                a.Money = 10;
-                                MarketMoney -= 15;
-                                a.Commodities.First(p => p.Type == CommodityType.Wheat).Stock += 3;
+                                a.Money += 10;
+                                MarketMoney -= 10;
+                                //a.Commodities.First(p => p.Type == CommodityType.Wheat).Stock += 3;
                             }
                           
                             a.daysSinceMove = 0;
