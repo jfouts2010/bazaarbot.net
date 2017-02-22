@@ -64,5 +64,10 @@ namespace WindowsFormsApplication2
         {
 
         }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

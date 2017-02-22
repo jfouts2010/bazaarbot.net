@@ -35,8 +35,7 @@ namespace WindowsFormsApplication2
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    if (x == Occupation.blacksmith)
-                        i++;
+                   
                     //make agents for each trade
                     Agent agent = new Agent();
                     agent.Job = x;
@@ -45,7 +44,7 @@ namespace WindowsFormsApplication2
                     market.Agents.Add(agent);
                 }
             }
-            for (int i = 0; i < 15000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 if (day == 900)
                 {
@@ -54,10 +53,7 @@ namespace WindowsFormsApplication2
                 //one day
                 foreach (Agent a in market.Agents)
                 {
-                    if (a.Job == Occupation.blacksmith && a.Money > 20)
-                    {
-                        int x = 5;
-                    }
+                   
                     Setup.DoJob(a);
                     CreateTickets(a, market);
                 }
@@ -175,29 +171,41 @@ namespace WindowsFormsApplication2
         }
         public Occupation CommodityTypeToOccupation(CommodityType type)
         {
-            if (type == CommodityType.food)
-                return Occupation.farmer;
-            else if (type == CommodityType.metal)
-                return Occupation.refiner;
-            else if (type == CommodityType.ore)
-                return Occupation.miner;
-            else if (type == CommodityType.tools)
-                return Occupation.blacksmith;
+            if (type == CommodityType.Wheat)
+                return Occupation.Farmer;
+            else if (type == CommodityType.Fish)
+                return Occupation.Fisher;
+            else if (type == CommodityType.Timber)
+                return Occupation.Woodworker;
+            else if (type == CommodityType.Grapes)
+                return Occupation.GrapeFarmer;
+            else if (type == CommodityType.Cattle)
+                return Occupation.CattleRancher;
+            else if (type == CommodityType.Pig)
+                return Occupation.PigRancher;
+            else if (type == CommodityType.FruitVegetables)
+                return Occupation.FruitVegFarmer;
             else
-                return Occupation.woodcutter;
+                return Occupation.NutFarmer;
         }
         public CommodityType OccuptationToCommodityType(Occupation occ)
         {
-            if (occ == Occupation.farmer)
-                return CommodityType.food;
-            else if (occ == Occupation.refiner)
-                return CommodityType.metal;
-            else if (occ == Occupation.miner)
-                return CommodityType.ore;
-            else if (occ == Occupation.blacksmith)
-                return CommodityType.tools;
+            if (occ == Occupation.Fisher)
+                return CommodityType.Fish;
+            else if (occ == Occupation.Farmer)
+                return CommodityType.Wheat;
+            else if (occ == Occupation.Woodworker)
+                return CommodityType.Timber;
+            else if (occ == Occupation.GrapeFarmer)
+                return CommodityType.Grapes;
+            else if (occ == Occupation.CattleRancher)
+                return CommodityType.Cattle;
+            else if (occ == Occupation.PigRancher)
+                return CommodityType.Pig;
+            else if (occ == Occupation.FruitVegFarmer)
+                return CommodityType.FruitVegetables;
             else
-                return CommodityType.wood;
+                return CommodityType.Nuts;
         }
         public void MoveAgents(int day)
         {
@@ -216,7 +224,7 @@ namespace WindowsFormsApplication2
                             {
                                 a.Money = 10;
                                 MarketMoney -= 15;
-                                a.Commodities.First(p => p.Type == CommodityType.food).Stock += 3;
+                                a.Commodities.First(p => p.Type == CommodityType.Wheat).Stock += 3;
                             }
                           
                             a.daysSinceMove = 0;

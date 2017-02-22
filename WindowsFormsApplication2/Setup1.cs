@@ -7,7 +7,7 @@ using WindowsFormsApplication2;
 
 namespace Example2
 {
-    class Setup
+   /* class Setup
     {
         public static List<Commodity> StartingResourcesBasic()
         {
@@ -211,5 +211,5 @@ namespace Example2
         miner,
         refiner,
         blacksmith
-    }
+    }*/
 }
