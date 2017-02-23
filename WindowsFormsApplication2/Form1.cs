@@ -27,11 +27,17 @@ namespace WindowsFormsApplication2
                 }
                 foreach (GraphData data in market.Data.Where(p =>p.Type == c).ToList())
                 {
-                    supply.Series[type].Points.AddXY(data.day, data.Supply);
-                    demand.Series[type].Points.AddXY(data.day, data.Demand);
-                    chart3.Series[type].Points.AddXY(data.day, data.AmountSold);
-                    chart1.Series[type].Points.AddXY(data.day, data.Price);
-                    priceDemand.Series[type].Points.AddXY(data.day, data.workers == 0? data.Price * data.Demand : data.Price*data.Demand / data.workers);
+                
+                    {
+                        supply.Series[type].Points.AddXY(data.day, data.Supply);
+                        demand.Series[type].Points.AddXY(data.day, data.Demand);
+                        chart3.Series[type].Points.AddXY(data.day, data.AmountSold);
+                        chart1.Series[type].Points.AddXY(data.day, data.Price);
+                        double asdf = data.Price * Market.DailyProductionMinusIncome(Market.CommodityTypeToOccupation(data.Type)) * (data.Demand > data.Supply ? 1 : data.Demand / data.Supply);
+                       if (asdf > 4)
+                            asdf = 4;
+                        priceDemand.Series[type].Points.AddXY(data.day, asdf);
+                    }
                 }
                 type++;
             }
@@ -46,6 +52,10 @@ namespace WindowsFormsApplication2
                 int x = 0;
                 foreach (OccupationData com in CommodityData)
                 {
+                    if (com.day == 950)
+                    {
+                        int x2 = 5;
+                    }
                     chart2.Series[type].Points.AddXY(com.day, com.workers);
                     agentmoney.Series[type].Points.AddXY(com.day, com.money/com.workers);
                     agentincome.Series[type].Points.AddXY(com.day, com.income/com.workers);

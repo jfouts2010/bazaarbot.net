@@ -15,13 +15,15 @@ namespace Example1
             foreach (CommodityType ct in Enum.GetValues(typeof(CommodityType)))
             {
                 Commodity c = new Commodity();
-                c.DesiredStock = 10;
+                c.DesiredStock = 1;
                 c.max = 1;
                 c.min = 0.8;
                 c.Stock = 10;
                 c.Type = ct;
                 startingResources.Add(c);
             }
+           // startingResources.First(p => p.Type == CommodityType.Wheat).min = 4;
+            //startingResources.First(p => p.Type == CommodityType.Wheat).min = 5;
             return startingResources;
         }
 
@@ -32,25 +34,25 @@ namespace Example1
             {
                 foreach(Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Wheat).DesiredStock = 0;
-                agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock += 7.767;
+                agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock += 1.4*2;
             }
             if (agent.Job == Occupation.Fisher)
             {
                 foreach (Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Fish).DesiredStock = 0;
-                agent.Commodities.First(p => p.Type == CommodityType.Fish).Stock += 12;
+                agent.Commodities.First(p => p.Type == CommodityType.Fish).Stock += 35.266;
             }
             if (agent.Job == Occupation.Woodworker)
             {
                 foreach (Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Timber).DesiredStock = 0;
                 agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock += 2.93;
@@ -59,54 +61,54 @@ namespace Example1
             {
                 foreach (Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Grapes).DesiredStock = 0;
-                agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock += 2.08155;
+                agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock += 1.734625;
             }
             if (agent.Job == Occupation.CattleRancher)
             {
                 foreach (Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Cattle).DesiredStock = 0;
-                agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock += 0.0020548*5;
+                agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock += 1.25*5;
             }
             if (agent.Job == Occupation.PigRancher)
             {
                 foreach (Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Pig).DesiredStock = 0;
-                agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock += .068493*5;
+                agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock += 10.96*5;
             }
             if (agent.Job == Occupation.FruitVegFarmer)
             {
                 foreach (Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).DesiredStock = 0;
-                agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock += 4.96986;
+                agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock += 2.2149;
             }
             if (agent.Job == Occupation.NutFarmer)
             {
                 foreach (Commodity c in agent.Commodities)
                 {
-                    c.DesiredStock = 10;
+                    c.DesiredStock = 1;
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Nuts).DesiredStock = 0;
-                agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock += 1.15342;
+                agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock += 9.041;
             }
             if(agent.Commodities.First(p=>p.Type ==CommodityType.Fish).Stock > 0)
             {
-                agent.Commodities.First(p => p.Type == CommodityType.Fish).Stock -= .113424 * 3;
+                agent.Commodities.First(p => p.Type == CommodityType.Fish).Stock -= 1;
             }
             if (agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock > 0)
             {
-                agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock -= 1.84931*3;
+                agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock -= 1;
             }
             if (agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock > 0)
             {
@@ -114,23 +116,23 @@ namespace Example1
             }
             if (agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock > 0)
             {
-                agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock -= .4 * 3;
+                agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock -= 1;
             }
             if (agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock > 0)
             {
-                agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock -= .000547945 * 3;
+                agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock -= 1;
             }
             if (agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock > 0)
             {
-                agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock -= .00208219 * 3;
+                agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock -= 1;
             }
             if (agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock > 0)
             {
-                agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock -= .747945 * 3;
+                agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock -= 1;
             }
             if (agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock > 0)
             {
-                agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock -= .042523 * 3;
+                agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock -= 1;
             }
         }
 
