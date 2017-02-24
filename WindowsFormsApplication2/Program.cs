@@ -266,8 +266,7 @@ namespace WindowsFormsApplication2
                             a.daysSinceMove = 0;
                             break;
                         }
-                        else
-                            break;
+                        
                 }
             }
             foreach (Agent a2 in Agents)
@@ -283,8 +282,7 @@ namespace WindowsFormsApplication2
                             switchedAgents++;
                             break;
                         }
-                        else
-                            break;
+                       
 
                 }
 
@@ -307,6 +305,13 @@ namespace WindowsFormsApplication2
                 List<Ticket> tempAsks = Asks.Where(p => p.commodity == c).OrderBy(p => p.Price).ToList();
                 double TodaySupply = 0;
                 double TodayDemand = 0;
+
+                double HighestBid = 0;
+                if(tempBids.Count > 0)
+                    HighestBid = tempBids.First().Price;
+                double LowestAsk = 0;
+                if(tempAsks.Count > 0)
+                    LowestAsk = tempAsks.First().Price;
                 foreach (Ticket bid in tempBids)
                 {
                     TodayDemand += bid.Ideal;
@@ -350,14 +355,14 @@ namespace WindowsFormsApplication2
                 {
                     foreach (Ticket t in tempBids)
                     {
-                         t.TicketsAgent.RejectedBid(c);
+                       //  t.TicketsAgent.RejectedBid(c, HighestBid);
                     }
                 }
                 if (tempAsks.Count > 0)
                 {
                     foreach (Ticket t in tempAsks)
                     {
-                         t.TicketsAgent.RejectedAsk(c);
+                       //  t.TicketsAgent.RejectedAsk(c, LowestAsk);
                     }
                 }
                 double GuesstimatePrice = 0;
@@ -402,22 +407,22 @@ namespace WindowsFormsApplication2
         }
         public void AcceptedDeal(double clearingPrice, double quantTraded, CommodityType c)
         {
-            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice) / 2 * 1.1;
-            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice) / 2 * 0.9;
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice) / 2 *1.01;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice) / 2 *.99;
         }
-        public void RejectedBid(CommodityType c)
+        public void RejectedBid(CommodityType c, double HighestBid)
         {
-            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * 1.01*1.01;
-            Commodities.First(p => p.Type == c).min = Commodities.First(p => p.Type == c).min * 1.01*.99;
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + HighestBid) / 2 * .99;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + HighestBid) / 2 * 1.01;
             if (Commodities.First(p => p.Type == c).min > 9000)
                 Commodities.First(p => p.Type == c).min = 9000;
             if (Commodities.First(p => p.Type == c).max > 10000)
                 Commodities.First(p => p.Type == c).max = 10000;
         }
-        public void RejectedAsk(CommodityType c)
+        public void RejectedAsk(CommodityType c, double LowestAsk)
         {
-            Commodities.First(p => p.Type == c).max = Commodities.First(p => p.Type == c).max * .99*1.01;
-            Commodities.First(p => p.Type == c).min = Commodities.First(p => p.Type == c).min * .99*.99;
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + LowestAsk) / 2 * .99;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + LowestAsk) / 2 * 1.01;
             if (Commodities.First(p => p.Type == c).min < 0.1)
                 Commodities.First(p => p.Type == c).min = 0.1;
             if (Commodities.First(p => p.Type == c).max < 0.15)
