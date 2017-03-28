@@ -40,12 +40,11 @@ namespace WindowsFormsApplication2
             Random r = new Random();
             Dictionary<int, int> vales = new Dictionary<int, int>();
 
+            //make agents for each trade
             foreach (Occupation x in Enum.GetValues(typeof(Occupation)))
             {
                 for (int i = 0; i < StartNumber[x]; i++)
                 {
-
-                    //make agents for each trade
                     Agent agent = new Agent();
                     agent.Job = x;
                     agent.Money = 500;
@@ -53,30 +52,28 @@ namespace WindowsFormsApplication2
                     market.Agents.Add(agent);
                 }
             }
+            //This is Daily Function
             for (int i = 0; i < 2000; i++)
             {
-                if (day == 1980)
-                {
-                    int x = 5;
-                }
-                //one day
+                //daily work for each agent
                 foreach (Agent a in market.Agents)
                 {
-                    if (a.Job == Occupation.Farmer)
-                    {
-                        int x = 5;
-                    }
                     Setup.DoJob(a);
+                    if (a.Job == Occupation.Woodworker && day > 600 && day < 700)
+                    {
+                        a.Commodities.First(p => p.Type == CommodityType.Timber).Stock = 0;
+                    }
                     CreateTickets(a, market);
                 }
+                //end of day market work
                 market.ResolveTickets(day);
-
                 market.GetOccupationNumbers(day);
                 market.MoveAgents(day);
                 day++;
             }
             return market;
         }
+        //Agent Creating Tickets to buy and sell his goods
         static void CreateTickets(Agent agent, Market market)
         {
             Random rand = new Random();
@@ -240,35 +237,30 @@ namespace WindowsFormsApplication2
             else
                 return 8.041;
         }
+        //move bad agents
         public void MoveAgents(int day)
         {
             Random r = new Random();
+            //if the agent has less than 100 dollars, income over past 30 days < 0, and has lost money yesterdya, will attempt to move
             List<Agent> SwitchingAgents = Agents.Where(p => p.Money < 100 && p.Past30DayIncome <= 0 && p.MoneyDifferenceFromYesterday < 0).ToList();
             int switchedAgents = 0;
             foreach (Agent a in SwitchingAgents)
             {
-                if (a.daysSinceMove > (30 + r.Next(0, 100)))
+                if (a.daysSinceMove > (30 + r.Next(0, 10)))
                 {
-
                     List<GraphData> x = Data.Where(p => p.day == day).OrderByDescending(p => p.Price * DailyProductionMinusIncome(CommodityTypeToOccupation(p.Type)) * (p.Demand > p.Supply ? 1 : p.Demand / p.Supply)).ToList();
                     foreach (GraphData x2 in x)
                         if (a.Job != CommodityTypeToOccupation(x2.Type))
                         {
-
                             a.Job = CommodityTypeToOccupation(x2.Type);
-                            /*    if (a.Money < 0)
-                                {
-                                    a.Money += 10;
-                                    MarketMoney -= 10;
-                                    //a.Commodities.First(p => p.Type == CommodityType.Wheat).Stock += 3;
-                                }*/
                             switchedAgents++;
                             a.daysSinceMove = 0;
                             break;
                         }
-                        
+
                 }
             }
+            //these are agents that are loosing tons of money, but arent moving because they previously made tons of money
             foreach (Agent a2 in Agents)
             {
                 if (a2.Past30DayIncome < 0 && a2.daysSinceMove > 30 + r.Next(0, 1000) && a2.MoneyDifferenceFromYesterday < 0)
@@ -282,10 +274,9 @@ namespace WindowsFormsApplication2
                             switchedAgents++;
                             break;
                         }
-                       
+
 
                 }
-
                 a2.IncomeHistory.Add(a2.MoneyDifferenceFromYesterday);
                 a2.Past30DayIncome = 0;
                 a2.daysSinceMove++;
@@ -296,6 +287,7 @@ namespace WindowsFormsApplication2
                 a2.MoneyDifferenceFromYesterday = 0;
             }
         }
+        //where trades occur
         public void ResolveTickets(int now)
         {
             double dailyTax = 0;
@@ -307,10 +299,10 @@ namespace WindowsFormsApplication2
                 double TodayDemand = 0;
 
                 double HighestBid = 0;
-                if(tempBids.Count > 0)
+                if (tempBids.Count > 0)
                     HighestBid = tempBids.First().Price;
                 double LowestAsk = 0;
-                if(tempAsks.Count > 0)
+                if (tempAsks.Count > 0)
                     LowestAsk = tempAsks.First().Price;
                 foreach (Ticket bid in tempBids)
                 {
@@ -355,14 +347,14 @@ namespace WindowsFormsApplication2
                 {
                     foreach (Ticket t in tempBids)
                     {
-                       //  t.TicketsAgent.RejectedBid(c, HighestBid);
+                         t.TicketsAgent.RejectedBid(c, HighestBid);
                     }
                 }
                 if (tempAsks.Count > 0)
                 {
                     foreach (Ticket t in tempAsks)
                     {
-                       //  t.TicketsAgent.RejectedAsk(c, LowestAsk);
+                         t.TicketsAgent.RejectedAsk(c, LowestAsk);
                     }
                 }
                 double GuesstimatePrice = 0;
@@ -407,13 +399,13 @@ namespace WindowsFormsApplication2
         }
         public void AcceptedDeal(double clearingPrice, double quantTraded, CommodityType c)
         {
-            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice) / 2 *1.01;
-            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice) / 2 *.99;
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + clearingPrice) / 2 * 1.01;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + clearingPrice) / 2 * .99;
         }
         public void RejectedBid(CommodityType c, double HighestBid)
         {
-            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + HighestBid) / 2 * .99;
-            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + HighestBid) / 2 * 1.01;
+            Commodities.First(p => p.Type == c).min = HighestBid * .99;
+            Commodities.First(p => p.Type == c).max = HighestBid * 1.01;
             if (Commodities.First(p => p.Type == c).min > 9000)
                 Commodities.First(p => p.Type == c).min = 9000;
             if (Commodities.First(p => p.Type == c).max > 10000)
@@ -421,8 +413,8 @@ namespace WindowsFormsApplication2
         }
         public void RejectedAsk(CommodityType c, double LowestAsk)
         {
-            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + LowestAsk) / 2 * .99;
-            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + LowestAsk) / 2 * 1.01;
+            Commodities.First(p => p.Type == c).min = LowestAsk * .98;
+            Commodities.First(p => p.Type == c).max = LowestAsk * 1;
             if (Commodities.First(p => p.Type == c).min < 0.1)
                 Commodities.First(p => p.Type == c).min = 0.1;
             if (Commodities.First(p => p.Type == c).max < 0.15)
