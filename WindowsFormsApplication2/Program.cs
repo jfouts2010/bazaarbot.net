@@ -53,16 +53,16 @@ namespace WindowsFormsApplication2
                 }
             }
             //This is Daily Function
-            for (int i = 0; i < 2000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 //daily work for each agent
                 foreach (Agent a in market.Agents)
                 {
                     Setup.DoJob(a);
-                    if (a.Job == Occupation.Woodworker && day > 600 && day < 700)
+                /*    if (a.Job == Occupation.Woodworker && day > 600 && day < 700)
                     {
                         a.Commodities.First(p => p.Type == CommodityType.Timber).Stock = 0;
-                    }
+                    }*/
                     CreateTickets(a, market);
                 }
                 //end of day market work
@@ -246,7 +246,7 @@ namespace WindowsFormsApplication2
             int switchedAgents = 0;
             foreach (Agent a in SwitchingAgents)
             {
-                if (a.daysSinceMove > (30 + r.Next(0, 10)))
+                if (a.daysSinceMove > (30 + r.Next(0, 1000)))
                 {
                     List<GraphData> x = Data.Where(p => p.day == day).OrderByDescending(p => p.Price * DailyProductionMinusIncome(CommodityTypeToOccupation(p.Type)) * (p.Demand > p.Supply ? 1 : p.Demand / p.Supply)).ToList();
                     foreach (GraphData x2 in x)
@@ -257,13 +257,14 @@ namespace WindowsFormsApplication2
                             a.daysSinceMove = 0;
                             break;
                         }
-
+                        else
+                            break;
                 }
             }
             //these are agents that are loosing tons of money, but arent moving because they previously made tons of money
             foreach (Agent a2 in Agents)
             {
-                if (a2.Past30DayIncome < 0 && a2.daysSinceMove > 30 + r.Next(0, 1000) && a2.MoneyDifferenceFromYesterday < 0)
+                if (a2.Past30DayIncome < 0 && a2.daysSinceMove > 30 + r.Next(0, 1000000) && a2.MoneyDifferenceFromYesterday < 0)
                 {
                     List<GraphData> x = Data.Where(p => p.day == day).OrderByDescending(p => p.Price * DailyProductionMinusIncome(CommodityTypeToOccupation(p.Type)) * (p.Demand > p.Supply ? 1 : p.Demand / p.Supply)).ToList();
                     foreach (GraphData x2 in x)
@@ -347,14 +348,14 @@ namespace WindowsFormsApplication2
                 {
                     foreach (Ticket t in tempBids)
                     {
-                         t.TicketsAgent.RejectedBid(c, HighestBid);
+                        t.TicketsAgent.RejectedBid(c, HighestBid);
                     }
                 }
                 if (tempAsks.Count > 0)
                 {
                     foreach (Ticket t in tempAsks)
                     {
-                         t.TicketsAgent.RejectedAsk(c, LowestAsk);
+                        t.TicketsAgent.RejectedAsk(c, LowestAsk);
                     }
                 }
                 double GuesstimatePrice = 0;
@@ -404,8 +405,8 @@ namespace WindowsFormsApplication2
         }
         public void RejectedBid(CommodityType c, double HighestBid)
         {
-            Commodities.First(p => p.Type == c).min = HighestBid * .99;
-            Commodities.First(p => p.Type == c).max = HighestBid * 1.01;
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + HighestBid) / 2 * 0.99;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + HighestBid) / 2 * 1.01;
             if (Commodities.First(p => p.Type == c).min > 9000)
                 Commodities.First(p => p.Type == c).min = 9000;
             if (Commodities.First(p => p.Type == c).max > 10000)
@@ -413,8 +414,8 @@ namespace WindowsFormsApplication2
         }
         public void RejectedAsk(CommodityType c, double LowestAsk)
         {
-            Commodities.First(p => p.Type == c).min = LowestAsk * .98;
-            Commodities.First(p => p.Type == c).max = LowestAsk * 1;
+            Commodities.First(p => p.Type == c).min = (Commodities.First(p => p.Type == c).min + LowestAsk) / 2 * 0.99;
+            Commodities.First(p => p.Type == c).max = (Commodities.First(p => p.Type == c).max + LowestAsk) / 2 * 1.01;
             if (Commodities.First(p => p.Type == c).min < 0.1)
                 Commodities.First(p => p.Type == c).min = 0.1;
             if (Commodities.First(p => p.Type == c).max < 0.15)

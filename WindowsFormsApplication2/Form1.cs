@@ -34,6 +34,7 @@ namespace WindowsFormsApplication2
                         chart3.Series[type].Points.AddXY(data.day, data.AmountSold);
                         chart1.Series[type].Points.AddXY(data.day, data.Price);
                         double asdf = data.Price * Market.DailyProductionMinusIncome(Market.CommodityTypeToOccupation(data.Type)) * (data.Demand > data.Supply ? 1 : data.Demand / data.Supply);
+
                        if (asdf > 4)
                             asdf = 4;
                         priceDemand.Series[type].Points.AddXY(data.day, asdf);

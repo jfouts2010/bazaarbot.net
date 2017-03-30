@@ -197,7 +197,7 @@
             this.chart1.Series.Add(series6);
             this.chart1.Series.Add(series7);
             this.chart1.Series.Add(series8);
-            this.chart1.Size = new System.Drawing.Size(549, 210);
+            this.chart1.Size = new System.Drawing.Size(509, 210);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -388,7 +388,7 @@
             this.agentmoney.Series.Add(series23);
             this.agentmoney.Series.Add(series24);
             this.agentmoney.Series.Add(series25);
-            this.agentmoney.Size = new System.Drawing.Size(549, 184);
+            this.agentmoney.Size = new System.Drawing.Size(509, 184);
             this.agentmoney.TabIndex = 18;
             this.agentmoney.Text = "chart3";
             // 
@@ -454,7 +454,7 @@
             this.agentincome.Series.Add(series31);
             this.agentincome.Series.Add(series32);
             this.agentincome.Series.Add(series33);
-            this.agentincome.Size = new System.Drawing.Size(549, 184);
+            this.agentincome.Size = new System.Drawing.Size(509, 184);
             this.agentincome.TabIndex = 20;
             this.agentincome.Text = "chart3";
             // 
