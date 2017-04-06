@@ -243,7 +243,7 @@ namespace WindowsFormsApplication2
         {
             Random r = new Random();
             //if the agent has less than 100 dollars, income over past 30 days < 0, and has lost money yesterdya, will attempt to move
-            List<Agent> SwitchingAgents = Agents.Where(p => p.Money < 100 && p.Past30DayIncome <= 0 && p.MoneyDifferenceFromYesterday < 0).ToList();
+            List<Agent> SwitchingAgents = Agents.Where(p => p.Money < 10 && p.Past30DayIncome <= 0 && p.MoneyDifferenceFromYesterday < 0).ToList();
             int switchedAgents = 0;
             foreach (Agent a in SwitchingAgents)
             {
@@ -338,8 +338,8 @@ namespace WindowsFormsApplication2
                         dailyTax += clearingPrice * amountTraded * 0.05;
                         bid.TicketsAgent.MoneyDifferenceFromYesterday -= clearingPrice * amountTraded;
                         ask.TicketsAgent.MoneyDifferenceFromYesterday += clearingPrice * amountTraded;
-                        ask.TicketsAgent.AcceptedDeal(clearingPrice, amountTraded, c);
-                        bid.TicketsAgent.AcceptedDeal(clearingPrice, amountTraded, c);
+                       // ask.TicketsAgent.AcceptedDeal(clearingPrice, amountTraded, c);
+                       // bid.TicketsAgent.AcceptedDeal(clearingPrice, amountTraded, c);
                     }
                     if (ask.Ideal == 0)
                         tempAsks.RemoveAt(0);
@@ -358,7 +358,7 @@ namespace WindowsFormsApplication2
                 {
                     foreach (Ticket t in tempAsks)
                     {
-                       // t.TicketsAgent.RejectedAsk(c, LowestAsk);
+                       t.TicketsAgent.RejectedAsk(c, LowestAsk);
                     }
                 }
                 double GuesstimatePrice = 0;

@@ -30,6 +30,46 @@ namespace Example1
         public static void DoJob(Agent agent)
         {
             Random ran = new Random();
+            if (agent.Commodities.First(p => p.Type == CommodityType.Fish).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.Fish).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
+            if (agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
+            if (agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
+            if (agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
+            if (agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
+            if (agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
+            if (agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
+            if (agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock > 0)
+            {
+                agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock -= 1;
+                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
+            }
             if (agent.Job == Occupation.Farmer)
             {
                 foreach(Commodity c in agent.Commodities)
@@ -102,46 +142,7 @@ namespace Example1
                 agent.Commodities.First(p => p.Type == CommodityType.Nuts).DesiredStock = 0;
                 agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock += 9.041;
             }
-            if(agent.Commodities.First(p=>p.Type ==CommodityType.Fish).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.Fish).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
-            if (agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.Wheat).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
-            if (agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
-            if (agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
-            if (agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.Cattle).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
-            if (agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.Pig).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
-            if (agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.FruitVegetables).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
-            if (agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock > 0)
-            {
-                agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock -= 1;
-                agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
+           
         }
 
     }
