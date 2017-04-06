@@ -111,6 +111,16 @@
             System.Windows.Forms.DataVisualization.Charting.Series series63 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series64 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series65 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series66 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series67 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series68 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series69 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series70 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series71 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series72 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series73 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -133,6 +143,8 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.priceDemand = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.textBox8 = new System.Windows.Forms.TextBox();
+            this.percentBought = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.textBox14 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarketMoney)).BeginInit();
@@ -142,6 +154,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.demand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.priceDemand)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.percentBought)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
@@ -179,10 +192,12 @@
             series5.Name = "cattle";
             series6.ChartArea = "ChartArea2";
             series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series6.Legend = "Legend1";
             series6.Name = "pig";
             series7.ChartArea = "ChartArea2";
             series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series7.Legend = "Legend1";
             series7.Name = "fruit";
             series8.ChartArea = "ChartArea2";
@@ -235,10 +250,12 @@
             series13.Name = "cattle rancher";
             series14.ChartArea = "ChartArea2";
             series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series14.Legend = "Legend1";
             series14.Name = "pig rancher";
             series15.ChartArea = "ChartArea2";
             series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series15.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series15.Legend = "Legend1";
             series15.Name = "fruitveg farmer";
             series16.ChartArea = "ChartArea2";
@@ -366,18 +383,22 @@
             series21.Name = "grapes";
             series22.ChartArea = "ChartArea2";
             series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series22.Color = System.Drawing.Color.Silver;
             series22.Legend = "Legend1";
             series22.Name = "cattle";
             series23.ChartArea = "ChartArea2";
             series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series23.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series23.Legend = "Legend1";
             series23.Name = "pig";
             series24.ChartArea = "ChartArea2";
             series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series24.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series24.Legend = "Legend1";
             series24.Name = "fruit";
             series25.ChartArea = "ChartArea2";
             series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series25.Color = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             series25.Legend = "Legend1";
             series25.Name = "nuts";
             this.agentmoney.Series.Add(series18);
@@ -436,10 +457,12 @@
             series30.Name = "cattle";
             series31.ChartArea = "ChartArea2";
             series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series31.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series31.Legend = "Legend1";
             series31.Name = "pig";
             series32.ChartArea = "ChartArea2";
             series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series32.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series32.Legend = "Legend1";
             series32.Name = "fruit";
             series33.ChartArea = "ChartArea2";
@@ -501,10 +524,12 @@
             series38.Name = "cattle";
             series39.ChartArea = "ChartArea2";
             series39.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series39.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series39.Legend = "Legend1";
             series39.Name = "pig";
             series40.ChartArea = "ChartArea2";
             series40.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series40.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series40.Legend = "Legend1";
             series40.Name = "fruit";
             series41.ChartArea = "ChartArea2";
@@ -566,10 +591,12 @@
             series46.Name = "cattle";
             series47.ChartArea = "ChartArea2";
             series47.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series47.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series47.Legend = "Legend1";
             series47.Name = "pig";
             series48.ChartArea = "ChartArea2";
             series48.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series48.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series48.Legend = "Legend1";
             series48.Name = "fruit";
             series49.ChartArea = "ChartArea2";
@@ -631,10 +658,12 @@
             series54.Name = "cattle";
             series55.ChartArea = "ChartArea2";
             series55.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series55.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series55.Legend = "Legend1";
             series55.Name = "pig";
             series56.ChartArea = "ChartArea2";
             series56.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series56.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series56.Legend = "Legend1";
             series56.Name = "fruit";
             series57.ChartArea = "ChartArea2";
@@ -696,10 +725,12 @@
             series62.Name = "cattle";
             series63.ChartArea = "ChartArea2";
             series63.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series63.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             series63.Legend = "Legend1";
             series63.Name = "pig";
             series64.ChartArea = "ChartArea2";
             series64.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series64.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             series64.Legend = "Legend1";
             series64.Name = "fruit";
             series65.ChartArea = "ChartArea2";
@@ -720,17 +751,86 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(994, 704);
+            this.textBox8.Location = new System.Drawing.Point(977, 717);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(141, 20);
             this.textBox8.TabIndex = 29;
             this.textBox8.Text = "Price * Demand / Workers";
             // 
+            // percentBought
+            // 
+            chartArea10.Name = "ChartArea2";
+            this.percentBought.ChartAreas.Add(chartArea10);
+            legend10.Name = "Legend1";
+            this.percentBought.Legends.Add(legend10);
+            this.percentBought.Location = new System.Drawing.Point(1089, 568);
+            this.percentBought.Name = "percentBought";
+            series66.BorderWidth = 5;
+            series66.ChartArea = "ChartArea2";
+            series66.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series66.Legend = "Legend1";
+            series66.MarkerSize = 10;
+            series66.Name = "fish";
+            series67.BorderWidth = 4;
+            series67.ChartArea = "ChartArea2";
+            series67.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series67.Legend = "Legend1";
+            series67.Name = "wheat";
+            series68.BorderWidth = 3;
+            series68.ChartArea = "ChartArea2";
+            series68.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series68.Legend = "Legend1";
+            series68.Name = "timber";
+            series69.BorderWidth = 2;
+            series69.ChartArea = "ChartArea2";
+            series69.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series69.Legend = "Legend1";
+            series69.Name = "grapes";
+            series70.ChartArea = "ChartArea2";
+            series70.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series70.Legend = "Legend1";
+            series70.Name = "cattle";
+            series71.ChartArea = "ChartArea2";
+            series71.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series71.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series71.Legend = "Legend1";
+            series71.Name = "pig";
+            series72.ChartArea = "ChartArea2";
+            series72.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series72.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series72.Legend = "Legend1";
+            series72.Name = "fruit";
+            series73.ChartArea = "ChartArea2";
+            series73.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series73.Legend = "Legend1";
+            series73.Name = "nuts";
+            this.percentBought.Series.Add(series66);
+            this.percentBought.Series.Add(series67);
+            this.percentBought.Series.Add(series68);
+            this.percentBought.Series.Add(series69);
+            this.percentBought.Series.Add(series70);
+            this.percentBought.Series.Add(series71);
+            this.percentBought.Series.Add(series72);
+            this.percentBought.Series.Add(series73);
+            this.percentBought.Size = new System.Drawing.Size(549, 186);
+            this.percentBought.TabIndex = 30;
+            this.percentBought.Text = "chart4";
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(1522, 717);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(141, 20);
+            this.textBox14.TabIndex = 31;
+            this.textBox14.Text = "Percent Bought";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1579, 840);
+            this.ClientSize = new System.Drawing.Size(1621, 819);
+            this.Controls.Add(this.textBox14);
+            this.Controls.Add(this.percentBought);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.priceDemand);
             this.Controls.Add(this.textBox6);
@@ -764,6 +864,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.demand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.priceDemand)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.percentBought)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -793,6 +894,8 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart priceDemand;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.DataVisualization.Charting.Chart demand;
+        private System.Windows.Forms.DataVisualization.Charting.Chart percentBought;
+        private System.Windows.Forms.TextBox textBox14;
     }
 }
 

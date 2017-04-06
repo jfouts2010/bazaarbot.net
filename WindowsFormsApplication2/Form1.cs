@@ -29,7 +29,10 @@ namespace WindowsFormsApplication2
                 {
                 
                     {
-                        supply.Series[type].Points.AddXY(data.day, data.Supply);
+                        if (data.Supply > 1000)
+                            supply.Series[type].Points.AddXY(data.day, 1000);
+                        else
+                            supply.Series[type].Points.AddXY(data.day, data.Supply);
                         demand.Series[type].Points.AddXY(data.day, data.Demand);
                         chart3.Series[type].Points.AddXY(data.day, data.AmountSold);
                         chart1.Series[type].Points.AddXY(data.day, data.Price);
@@ -60,7 +63,7 @@ namespace WindowsFormsApplication2
                     chart2.Series[type].Points.AddXY(com.day, com.workers);
                     agentmoney.Series[type].Points.AddXY(com.day, com.money/com.workers);
                     agentincome.Series[type].Points.AddXY(com.day, com.income/com.workers);
-                    
+                    percentBought.Series[type].Points.AddXY(com.day, com.PercentBought);
                 }
                 type++;
             }
