@@ -29,7 +29,7 @@ namespace WindowsFormsApplication2
                 {
                 
                     {
-                        if(data.day == 1999)
+                        if(data.day == 4999)
                         {
                             int x22 = 5;
                         }
@@ -61,7 +61,10 @@ namespace WindowsFormsApplication2
                 int x = 0;
                 foreach (OccupationData com in CommodityData)
                 {
-                   
+                   if(com.day == 4999)
+                    {
+                        int x222 = 5;
+                    }
                     chart2.Series[type].Points.AddXY(com.day, com.workers);
                     agentmoney.Series[type].Points.AddXY(com.day, com.money/com.workers);
                     agentincome.Series[type].Points.AddXY(com.day, com.income/com.workers);
