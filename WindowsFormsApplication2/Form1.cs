@@ -29,6 +29,11 @@ namespace WindowsFormsApplication2
                 {
                 
                     {
+                        if(data.day == 1999)
+                        {
+                            int x22 = 5;
+                        }
+
                         if (data.Supply > 1000)
                             supply.Series[type].Points.AddXY(data.day, 1000);
                         else
@@ -56,10 +61,7 @@ namespace WindowsFormsApplication2
                 int x = 0;
                 foreach (OccupationData com in CommodityData)
                 {
-                    if (com.day == 950)
-                    {
-                        int x2 = 5;
-                    }
+                   
                     chart2.Series[type].Points.AddXY(com.day, com.workers);
                     agentmoney.Series[type].Points.AddXY(com.day, com.money/com.workers);
                     agentincome.Series[type].Points.AddXY(com.day, com.income/com.workers);

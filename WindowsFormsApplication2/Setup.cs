@@ -20,6 +20,47 @@ namespace Example1
                 c.min = 0.8;
                 c.Stock = 1;
                 c.Type = ct;
+
+                if (ct == CommodityType.Fish)
+                {
+                    c.min = 1.1;
+                    c.max = 1.2;
+                }
+                if (ct == CommodityType.Wheat)
+                {
+                    c.min = 11.9;
+                    c.max = 12;
+                }
+                if (ct == CommodityType.Timber)
+                {
+                    c.min = 11.9;
+                    c.max = 12;
+                }
+                if (ct == CommodityType.Grapes)
+                {
+                    c.min = 41;
+                    c.max = 42;
+                }
+                if (ct == CommodityType.Cattle)
+                {
+                    c.min = 4.1;
+                    c.max = 4.2;
+                }
+                if (ct == CommodityType.Pig)
+                {
+                    c.min = .9;
+                    c.max = 1;
+                }
+                if (ct == CommodityType.FruitVegetables)
+                {
+                    c.min = 13.2;
+                    c.max = 13.8;
+                }
+                if (ct == CommodityType.Nuts)
+                {
+                    c.min = 2.7;
+                    c.max = 2.9;
+                }
                 startingResources.Add(c);
             }
            // startingResources.First(p => p.Type == CommodityType.Wheat).min = 4;

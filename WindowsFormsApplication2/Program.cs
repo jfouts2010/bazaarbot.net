@@ -10,6 +10,7 @@ namespace WindowsFormsApplication2
 {
     static class Program
     {
+        public static bool ForestFire = false;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -34,6 +35,7 @@ namespace WindowsFormsApplication2
         static Market RunExample(Dictionary<Occupation, int> StartNumber)
         {
             int day = 1;
+          
             Market market = new Market();
             List<Commodity> startingResources = new List<Commodity>();
             startingResources = Setup.StartingResourcesBasic();
@@ -47,7 +49,7 @@ namespace WindowsFormsApplication2
                 {
                     Agent agent = new Agent();
                     agent.Job = x;
-                    agent.Money = 500;
+                    agent.Money = 50;
                     agent.Commodities = SetCommodities(startingResources);
                     market.Agents.Add(agent);
                 }
@@ -59,13 +61,12 @@ namespace WindowsFormsApplication2
                 foreach (Agent a in market.Agents)
                 {
                     Setup.DoJob(a);
-
                     CreateTickets(a, market);
                 }
                 //end of day market work
                 market.ResolveTickets(day);
                 market.GetOccupationNumbers(day);
-                market.MoveAgents(day);
+                market.MoveAgents(day, ForestFire);
                 day++;
             }
             return market;
@@ -239,18 +240,22 @@ namespace WindowsFormsApplication2
                 return 8.041;
         }
         //move bad agents
-        public void MoveAgents(int day)
+        public void MoveAgents(int day, bool ForestFire)
         {
             Random r = new Random();
             //if the agent has less than 100 dollars, income over past 30 days < 0, and has lost money yesterdya, will attempt to move
             List<Agent> SwitchingAgents = Agents.Where(p => p.Money < 10 && p.Past30DayIncome <= 0 && p.MoneyDifferenceFromYesterday < 0).ToList();
             int switchedAgents = 0;
+            //PROBLEM: Agent Might move fore forest fire, as there is no more supply so people want to join!
             foreach (Agent a in SwitchingAgents)
             {
                 if (a.daysSinceMove > (30 + r.Next(0, 1000)))
                 {
                     List<GraphData> x = Data.Where(p => p.day == day).OrderByDescending(p => p.Price * DailyProductionMinusIncome(CommodityTypeToOccupation(p.Type)) * (p.Demand > p.Supply ? 1 : p.Demand / p.Supply)).ToList();
                     foreach (GraphData x2 in x)
+                    {
+                        if (x2.Type == CommodityType.Timber && ForestFire)
+                            continue;
                         if (a.Job != CommodityTypeToOccupation(x2.Type))
                         {
                             a.Job = CommodityTypeToOccupation(x2.Type);
@@ -260,6 +265,7 @@ namespace WindowsFormsApplication2
                         }
                         else
                             break;
+                    }
                 }
             }
             //these are agents that are loosing tons of money, but arent moving because they previously made tons of money
