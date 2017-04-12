@@ -31,9 +31,9 @@ namespace WindowsFormsApplication2
             Application.SetCompatibleTextRenderingDefault(false);
             Market data = new Market();
 
-            data.Data = JsonConvert.DeserializeObject<List<GraphData>>(System.IO.File.ReadAllText(@"C:\Users\John\Documents\RomeCitySim\Assets\jsondata.txt"));
-            data.GraphData = JsonConvert.DeserializeObject<List<Commodity>>(System.IO.File.ReadAllText(@"C:\Users\John\Documents\RomeCitySim\Assets\jsongraphdata.txt"));
-            data.MarketData = JsonConvert.DeserializeObject<List<MarketData>>(System.IO.File.ReadAllText(@"C:\Users\John\Documents\RomeCitySim\Assets\jsonmarketdata.txt"));
+            data.Data = JsonConvert.DeserializeObject<List<GraphData>>(System.IO.File.ReadAllText(@"C:\Users\jfouts\Documents\Visual Studio 2015\Projects\RomeCitySim\jsondata.txt"));
+            data.OccupationD = JsonConvert.DeserializeObject<List<OccupationData>>(System.IO.File.ReadAllText(@"C:\Users\jfouts\Documents\Visual Studio 2015\Projects\RomeCitySim\jsongraphdata.txt"));
+            data.MarketData = JsonConvert.DeserializeObject<List<MarketData>>(System.IO.File.ReadAllText(@"C:\Users\jfouts\Documents\Visual Studio 2015\Projects\RomeCitySim\jsonmarketdata.txt"));
             Application.Run(new Form1(data));
 
         }
@@ -131,6 +131,7 @@ namespace WindowsFormsApplication2
     {
         public int day;
         public Occupation job;
+       // public List<Commodity> commodities;
         public int workers;
         public double money;
         public double PercentBought;
@@ -176,6 +177,7 @@ namespace WindowsFormsApplication2
                 OccupationData od = new OccupationData();
                 od.day = day;
                 od.job = o;
+               // od.commodities = Agents.Where(p => p.Job == o).First().Commodities;
                 od.workers = Agents.Where(p => p.Job == o).Count();
                 foreach (Agent a in Agents.Where(p => p.Job == o))
                 {
