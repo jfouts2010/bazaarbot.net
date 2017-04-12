@@ -1,10 +1,10 @@
 ﻿using Example1;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 namespace WindowsFormsApplication2
 {
@@ -26,9 +26,14 @@ namespace WindowsFormsApplication2
             StartNumber.Add(Occupation.NutFarmer, 7);
             StartNumber.Add(Occupation.PigRancher, 10);
             StartNumber.Add(Occupation.Woodworker, 83);
-            Market data = RunExample(StartNumber);
+            //Market data = RunExample(StartNumber);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Market data = new Market();
+
+            data.Data = JsonConvert.DeserializeObject<List<GraphData>>(System.IO.File.ReadAllText(@"C:\Users\John\Documents\RomeCitySim\Assets\jsondata.txt"));
+            data.GraphData = JsonConvert.DeserializeObject<List<Commodity>>(System.IO.File.ReadAllText(@"C:\Users\John\Documents\RomeCitySim\Assets\jsongraphdata.txt"));
+            data.MarketData = JsonConvert.DeserializeObject<List<MarketData>>(System.IO.File.ReadAllText(@"C:\Users\John\Documents\RomeCitySim\Assets\jsonmarketdata.txt"));
             Application.Run(new Form1(data));
 
         }

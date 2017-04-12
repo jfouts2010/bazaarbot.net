@@ -29,14 +29,9 @@ namespace WindowsFormsApplication2
                 {
                 
                     {
-                        if(data.day == 4999)
-                        {
-                            int x22 = 5;
-                        }
+                       
 
-                        if (data.Supply > 1000)
-                            supply.Series[type].Points.AddXY(data.day, 1000);
-                        else
+                        
                             supply.Series[type].Points.AddXY(data.day, data.Supply);
                         demand.Series[type].Points.AddXY(data.day, data.Demand);
                         chart3.Series[type].Points.AddXY(data.day, data.AmountSold);
@@ -85,6 +80,11 @@ namespace WindowsFormsApplication2
         }
 
         private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
         {
 
         }
