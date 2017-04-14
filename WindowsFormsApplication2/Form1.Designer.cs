@@ -121,6 +121,16 @@
             System.Windows.Forms.DataVisualization.Charting.Series series71 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series72 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series73 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series74 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series75 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series76 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series77 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series78 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series79 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series80 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series81 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -145,6 +155,8 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.percentBought = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.textBox14 = new System.Windows.Forms.TextBox();
+            this.stock = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.textBox15 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarketMoney)).BeginInit();
@@ -155,6 +167,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.priceDemand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.percentBought)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stock)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
@@ -825,11 +838,82 @@
             this.textBox14.TabIndex = 31;
             this.textBox14.Text = "Percent Bought";
             // 
+            // stock
+            // 
+            chartArea11.Name = "ChartArea2";
+            this.stock.ChartAreas.Add(chartArea11);
+            legend11.Name = "Legend1";
+            this.stock.Legends.Add(legend11);
+            this.stock.Location = new System.Drawing.Point(1096, 397);
+            this.stock.Name = "stock";
+            series74.BorderWidth = 5;
+            series74.ChartArea = "ChartArea2";
+            series74.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series74.Legend = "Legend1";
+            series74.MarkerSize = 10;
+            series74.Name = "fish";
+            series75.BorderWidth = 4;
+            series75.ChartArea = "ChartArea2";
+            series75.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series75.Legend = "Legend1";
+            series75.Name = "wheat";
+            series76.BorderWidth = 3;
+            series76.ChartArea = "ChartArea2";
+            series76.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series76.Legend = "Legend1";
+            series76.Name = "timber";
+            series77.BorderWidth = 2;
+            series77.ChartArea = "ChartArea2";
+            series77.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series77.Legend = "Legend1";
+            series77.Name = "grapes";
+            series78.ChartArea = "ChartArea2";
+            series78.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series78.Color = System.Drawing.Color.Silver;
+            series78.Legend = "Legend1";
+            series78.Name = "cattle";
+            series79.ChartArea = "ChartArea2";
+            series79.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series79.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series79.Legend = "Legend1";
+            series79.Name = "pig";
+            series80.ChartArea = "ChartArea2";
+            series80.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series80.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series80.Legend = "Legend1";
+            series80.Name = "fruit";
+            series81.ChartArea = "ChartArea2";
+            series81.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series81.Color = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            series81.Legend = "Legend1";
+            series81.Name = "nuts";
+            this.stock.Series.Add(series74);
+            this.stock.Series.Add(series75);
+            this.stock.Series.Add(series76);
+            this.stock.Series.Add(series77);
+            this.stock.Series.Add(series78);
+            this.stock.Series.Add(series79);
+            this.stock.Series.Add(series80);
+            this.stock.Series.Add(series81);
+            this.stock.Size = new System.Drawing.Size(509, 184);
+            this.stock.TabIndex = 32;
+            this.stock.Text = "chart3";
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(1154, 388);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(100, 20);
+            this.textBox15.TabIndex = 33;
+            this.textBox15.Text = "Fisher Stock";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1621, 819);
+            this.Controls.Add(this.textBox15);
+            this.Controls.Add(this.stock);
             this.Controls.Add(this.textBox14);
             this.Controls.Add(this.percentBought);
             this.Controls.Add(this.textBox8);
@@ -866,6 +950,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.priceDemand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.percentBought)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -897,6 +982,8 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart demand;
         private System.Windows.Forms.DataVisualization.Charting.Chart percentBought;
         private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.DataVisualization.Charting.Chart stock;
+        private System.Windows.Forms.TextBox textBox15;
     }
 }
 
