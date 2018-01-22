@@ -17,26 +17,26 @@ namespace WindowsFormsApplication2
         [STAThread]
         static void Main()
         {
-            Dictionary<Occupation, int> StartNumber = new Dictionary<Occupation, int>();
-            StartNumber.Add(Occupation.Fisher, 41);
-            StartNumber.Add(Occupation.Farmer, 128);
-            StartNumber.Add(Occupation.CattleRancher, 9);
-            StartNumber.Add(Occupation.FruitVegFarmer, 4);
-            StartNumber.Add(Occupation.GrapeFarmer, 118);
-            StartNumber.Add(Occupation.NutFarmer, 7);
-            StartNumber.Add(Occupation.PigRancher, 10);
-            StartNumber.Add(Occupation.Woodworker, 83);
-            Market data = new Market();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            /* Dictionary<Occupation, int> StartNumber = new Dictionary<Occupation, int>();
+             StartNumber.Add(Occupation.Fisher, 41);
+             StartNumber.Add(Occupation.Farmer, 128);
+             StartNumber.Add(Occupation.CattleRancher, 0);//9);
+             StartNumber.Add(Occupation.FruitVegFarmer, 0);//4);
+             StartNumber.Add(Occupation.GrapeFarmer, 0);//118);
+             StartNumber.Add(Occupation.NutFarmer, 0);//7);
+             StartNumber.Add(Occupation.PigRancher, 0); //10);
+             StartNumber.Add(Occupation.Woodworker, 83);
+             Market data = new Market();
+             Application.EnableVisualStyles();
+             Application.SetCompatibleTextRenderingDefault(false);
 
-            data = RunExample(StartNumber);
+             data = RunExample(StartNumber);*/
 
             //code for importing
-            /*  data = new Market();
-              data.Data = JsonConvert.DeserializeObject<List<GraphData>>(System.IO.File.ReadAllText(@"C:\Users\jfouts\Documents\Visual Studio 2015\Projects\RomeCitySim\jsondata.txt"));
-              data.OccupationD = JsonConvert.DeserializeObject<List<OccupationData>>(System.IO.File.ReadAllText(@"C:\Users\jfouts\Documents\Visual Studio 2015\Projects\RomeCitySim\jsongraphdata.txt"));
-              data.MarketData = JsonConvert.DeserializeObject<List<MarketData>>(System.IO.File.ReadAllText(@"C:\Users\jfouts\Documents\Visual Studio 2015\Projects\RomeCitySim\jsonmarketdata.txt"));*/
+            Market data = new Market();
+            data.Data = JsonConvert.DeserializeObject<List<GraphData>>(System.IO.File.ReadAllText(@"C:\Users\John\source\repos\romeroads\TestGaia\jsondata.txt"));
+            data.OccupationD = JsonConvert.DeserializeObject<List<OccupationData>>(System.IO.File.ReadAllText(@"C:\Users\John\source\repos\romeroads\TestGaia\jsongraphdata.txt"));
+            data.MarketData = JsonConvert.DeserializeObject<List<MarketData>>(System.IO.File.ReadAllText(@"C:\Users\John\source\repos\romeroads\TestGaia\jsonmarketdata.txt"));
 
             Application.Run(new Form1(data));
 
@@ -58,7 +58,7 @@ namespace WindowsFormsApplication2
                 {
                     Agent agent = new Agent();
                     agent.Job = x;
-                    agent.Money = 50*50;
+                    agent.Money = 50 * 50;
                     agent.Commodities = SetCommodities(startingResources);
                     market.Agents.Add(agent);
                 }
@@ -70,15 +70,15 @@ namespace WindowsFormsApplication2
                 foreach (Agent a in market.Agents)
                 {
                     Setup.DoJob(a);
-                   /* if (day > 500 && day < 600 && a.Job == Occupation.Woodworker)
-                        a.Commodities.First(p => p.Type == CommodityType.Timber).Stock = 0;*/
+                    /* if (day > 500 && day < 600 && a.Job == Occupation.Woodworker)
+                         a.Commodities.First(p => p.Type == CommodityType.Timber).Stock = 0;*/
 
                     CreateTickets(a, market);
                 }
                 //end of day market work
                 market.ResolveTickets(day);
                 market.GetOccupationNumbers(day);
-                market.MoveAgents(day, ForestFire);
+                //market.MoveAgents(day, ForestFire);
                 day++;
             }
             return market;
@@ -90,8 +90,8 @@ namespace WindowsFormsApplication2
             double tempMoney = agent.Money;
             foreach (Commodity c in agent.Commodities.OrderBy(p => (p.max + p.min) / 2))
             {
-                if (c.Stock > 200*50)
-                    c.Stock = 200*50;
+                if (c.Stock > 200 * 50)
+                    c.Stock = 200 * 50;
                 if (c.Stock > c.DesiredStock)
                 {
                     //lets sell
@@ -202,9 +202,9 @@ namespace WindowsFormsApplication2
                 return Occupation.Farmer;
             else if (type == CommodityType.Fish)
                 return Occupation.Fisher;
-            else if (type == CommodityType.Timber)
+            else //if (type == CommodityType.Timber)
                 return Occupation.Woodworker;
-            else if (type == CommodityType.Grapes)
+           /* else if (type == CommodityType.Grapes)
                 return Occupation.GrapeFarmer;
             else if (type == CommodityType.Cattle)
                 return Occupation.CattleRancher;
@@ -213,7 +213,7 @@ namespace WindowsFormsApplication2
             else if (type == CommodityType.FruitVegetables)
                 return Occupation.FruitVegFarmer;
             else
-                return Occupation.NutFarmer;
+                return Occupation.NutFarmer;*/
         }
         static public CommodityType OccuptationToCommodityType(Occupation occ)
         {
@@ -221,9 +221,9 @@ namespace WindowsFormsApplication2
                 return CommodityType.Fish;
             else if (occ == Occupation.Farmer)
                 return CommodityType.Wheat;
-            else if (occ == Occupation.Woodworker)
+            else //if (occ == Occupation.Woodworker)
                 return CommodityType.Timber;
-            else if (occ == Occupation.GrapeFarmer)
+            /*else if (occ == Occupation.GrapeFarmer)
                 return CommodityType.Grapes;
             else if (occ == Occupation.CattleRancher)
                 return CommodityType.Cattle;
@@ -232,22 +232,22 @@ namespace WindowsFormsApplication2
             else if (occ == Occupation.FruitVegFarmer)
                 return CommodityType.FruitVegetables;
             else
-                return CommodityType.Nuts;
+                return CommodityType.Nuts;*/
         }
         static public double DailyProductionMinusIncome(Occupation occ, int day)
         {
             if (occ == Occupation.Farmer)
-                return 1.8*50;
+                return 1.8 * 50;
             if (occ == Occupation.Fisher)
-                return 34.266*50;
-            if (occ == Occupation.Woodworker)
+                return 34.266 * 50;
+            else //(occ == Occupation.Woodworker)
             {
-               /* if (day > 500 && day < 600)
-                    return 0;
-                else*/
-                    return 1.93*50;
+                /* if (day > 500 && day < 600)
+                     return 0;
+                 else*/
+                return 1.93 * 50;
             }
-            if (occ == Occupation.GrapeFarmer)
+           /* if (occ == Occupation.GrapeFarmer)
                 return .734625 * 50;
             if (occ == Occupation.CattleRancher)
                 return 1.25 * 5 * 50;
@@ -256,7 +256,7 @@ namespace WindowsFormsApplication2
             if (occ == Occupation.FruitVegFarmer)
                 return 1.2149 * 50;
             else
-                return 8.041 * 50;
+                return 8.041 * 50;*/
         }
         //move bad agents
         public void MoveAgents(int day, bool ForestFire)

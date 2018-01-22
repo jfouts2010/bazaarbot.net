@@ -36,7 +36,7 @@ namespace Example1
                     c.min = 11.9;
                     c.max = 12;
                 }
-                if (ct == CommodityType.Grapes)
+              /*  if (ct == CommodityType.Grapes)
                 {
                     c.min = 41;
                     c.max = 42;
@@ -60,7 +60,7 @@ namespace Example1
                 {
                     c.min = 2.7;
                     c.max = 2.9;
-                }
+                }*/
                 startingResources.Add(c);
             }
            // startingResources.First(p => p.Type == CommodityType.Wheat).min = 4;
@@ -86,7 +86,7 @@ namespace Example1
                 agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock -= 1 * 50;
                 agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
             }
-            if (agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock > 0)
+           /* if (agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock > 0)
             {
                 agent.Commodities.First(p => p.Type == CommodityType.Grapes).Stock -= 1 * 50;
                 agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
@@ -110,7 +110,7 @@ namespace Example1
             {
                 agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock -= 1 * 50;
                 agent.LastDayPercentBought += (double)1 / (Enum.GetValues(typeof(CommodityType))).Length;
-            }
+            }*/
             if (agent.Job == Occupation.Farmer)
             {
                 foreach(Commodity c in agent.Commodities)
@@ -138,7 +138,7 @@ namespace Example1
                 agent.Commodities.First(p => p.Type == CommodityType.Timber).DesiredStock = 0;
                 agent.Commodities.First(p => p.Type == CommodityType.Timber).Stock += 2.93 * 50;
             }
-            if (agent.Job == Occupation.GrapeFarmer)
+          /*  if (agent.Job == Occupation.GrapeFarmer)
             {
                 foreach (Commodity c in agent.Commodities)
                 {
@@ -182,7 +182,7 @@ namespace Example1
                 }
                 agent.Commodities.First(p => p.Type == CommodityType.Nuts).DesiredStock = 0;
                 agent.Commodities.First(p => p.Type == CommodityType.Nuts).Stock += 9.041 * 50;
-            }
+            }*/
            
         }
 
@@ -192,21 +192,21 @@ namespace Example1
         Fish,
         Wheat,
         Timber,
-        Grapes,
+       /* Grapes,
         Cattle,
         Pig,
         FruitVegetables,
-        Nuts
+        Nuts*/
     }
     public enum Occupation
     {
         Fisher,
         Farmer,
         Woodworker,
-        GrapeFarmer,
+       /* GrapeFarmer,
         CattleRancher,
         PigRancher,
         FruitVegFarmer,
-        NutFarmer
+        NutFarmer*/
     }
 }

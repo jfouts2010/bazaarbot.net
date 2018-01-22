@@ -21,3 +21,15 @@ C:\Users\John\Documents\Visual Studio 2015\Projects\bazaarbot.net\WindowsFormsAp
 C:\Users\John\Documents\Visual Studio 2015\Projects\bazaarbot.net\WindowsFormsApplication2\bin\Debug\Newtonsoft.Json.xml
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\bin\Debug\Newtonsoft.Json.dll
 C:\Users\jfouts\Documents\bazaarbot.net\WindowsFormsApplication2\bin\Debug\Newtonsoft.Json.xml
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form1.resources
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.CoreCompileInputs.cache
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.pdb
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\bin\Debug\Newtonsoft.Json.dll
+C:\Users\John\source\repos\bazaarbot.net\WindowsFormsApplication2\bin\Debug\Newtonsoft.Json.xml
